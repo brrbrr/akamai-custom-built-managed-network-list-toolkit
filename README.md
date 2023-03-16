@@ -78,7 +78,7 @@ For more information on Akamai EdgeGrid, _.edgerc_ file and creating Akamai Edge
 # Contributing
 
 We're happy to accept help from fellow code-monkeys.
-Report issues/questions/feature requests on in the [issues] section.
+Report issues/questions/feature requests on in the [issues](https://github.com/brrbrr/network-list-toolkit/issues) section.
 Refer to the [contribution guidelines](./contributing.md) for information on contributing to this module.
 
 # Authors
