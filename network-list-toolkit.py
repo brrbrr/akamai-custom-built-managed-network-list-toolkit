@@ -45,10 +45,10 @@ try:
     edgerc = EdgeRc(args.config)
     baseurl = 'https://%s' % edgerc.get(args.section, 'host')
     if args.accountkey:
-        ask = args.accountkey
+        ask = 'accountSwitchKey=' + args.accountkey
     else: 
         try:
-            ask = '%s' % edgerc.get(args.section, 'account_key')  
+            ask = 'accountSwitchKey=%s' % edgerc.get(args.section, 'account_key')  
         except Exception:
             ask = ''
     session = requests.Session()
@@ -67,7 +67,7 @@ START OF THE SRIPT
 log.info('Updating network list \'' + args.name + '\'. Action: ' + args.action)
 
 # Find our list, using the 'name' argument and obtain the Network List ID
-endpoint = baseurl + '/network-list/v2/network-lists?accountSwitchKey=' + ask + '&search=' + args.name
+endpoint = baseurl + '/network-list/v2/network-lists?' + ask + '&search=' + args.name
 result = session.get(endpoint).json()
 
 # Check that the list exists, and there is no ambiguity (more than 1 list)
@@ -80,7 +80,7 @@ if len(result['networkLists']) != 1:
 listId = result['networkLists'][0]['uniqueId']
 
 # Get the list details
-endpoint = baseurl + '/network-list/v2/network-lists/' + listId + '?accountSwitchKey=' + ask
+endpoint = baseurl + '/network-list/v2/network-lists/' + listId + '?' + ask
 result = session.get(endpoint).json()
 
 
@@ -128,14 +128,14 @@ endpoint = baseurl + '/network-list/v2/network-lists/' + listId
 
 # Update the list based on the supplied action (overwrite or append)
 if args.action == 'append':
-    endpoint = endpoint  + '/append' + '?accountSwitchKey=' + ask
+    endpoint = endpoint  + '/append' + '?' + ask
     # Append requires simplified payload
     result = {"list": sanitizedIps}
     # Append requires POST method
     method = 'POST'
 else:
     # Overwrite (update) requires PUT method
-    endpoint = endpoint  + '?accountSwitchKey=' + ask
+    endpoint = endpoint  + '?' + ask
     method = 'PUT'
 
 result = session.request(method, endpoint, json=result, headers={'Content-Type': 'application/json'})
@@ -152,7 +152,7 @@ else:
         log.info('Activating network list \'' + args.name + '\' on ' + args.network.upper() + ' network.')
 
         def checkStatus(listId, network):
-            endpoint = baseurl + '/network-list/v2/network-lists/' + listId + '/environments/' + network.upper() + '/status' + '?accountSwitchKey=' + ask
+            endpoint = baseurl + '/network-list/v2/network-lists/' + listId + '/environments/' + network.upper() + '/status' + '?' + ask
             result = session.get(endpoint).json()
             return result
 
@@ -164,7 +164,7 @@ else:
 
         log.info('Creating activation payload.')
         emailList = args.email.split(",")
-        endpoint = baseurl + '/network-list/v2/network-lists/' + listId + '/environments/' + args.network.upper() + '/activate' + '?accountSwitchKey=' + ask
+        endpoint = baseurl + '/network-list/v2/network-lists/' + listId + '/environments/' + args.network.upper() + '/activate' + '?' + ask
         payload = { "comments": args.comment, "notificationRecipients": emailList}
         result = session.post(endpoint, json=payload, headers={'Content-Type': 'application/json'}).json()
 
