@@ -14,15 +14,15 @@ logging.basicConfig(level='INFO', format='%(asctime)s %(levelname)s %(message)s'
 log = logging.getLogger()
 
 # Argparse will help manage command line arguments
-parser = argparse.ArgumentParser(description='Custom-Built Managed Network List Toolkit',
-                                 epilog='Built for automation of network list - bbrouard 2023',
+parser = argparse.ArgumentParser(description='Akamai Custom-Built Managed Network List Toolkit',
+                                 epilog='Made with ♥ in France by bbrouard',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 # Let's add a positional argument
-parser.add_argument('name', metavar='list-name', type=str, help='The name of our network list.')
+parser.add_argument('name', metavar='list-name', type=str, help='The name of the network list.')
 
 # Let's add optional arguments
 parser.add_argument('--file', action="store", default=os.getcwd() + "/list.csv", help="Path to CSV file with IPs for the network list.")
-parser.add_argument('--delimiter', action="store", default=',', help="CSV delimiter used. Default=\',\'")
+parser.add_argument('--delimiter', action="store", default=',', help="CSV delimiter used.")
 parser.add_argument('--url', action="store", help="URL to CSV file with IPs for the network list.")
 parser.add_argument('--action', action="store", default='append', help="The action to take on the network list. Supported options are: append or overwrite.")
 parser.add_argument('--network', action="store", help="Activation network: production or staging")
@@ -61,7 +61,7 @@ except Exception as e:
 
 """ 
 ##########################################
-START OF THE SRIPT
+START OF THE SCRIPT
 ##########################################
 """
 log.info('Updating network list \'' + args.name + '\'. Action: ' + args.action)
