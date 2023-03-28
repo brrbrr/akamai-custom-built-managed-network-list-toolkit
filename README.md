@@ -1,16 +1,16 @@
 
 <!--- These are examples. See https://shields.io for others or to customize this set of shields. You might want to include dependencies, project status and licence info here --->
-![GitHub repo size](https://img.shields.io/github/repo-size/brrbrr/network-list-toolkit)
-![GitHub contributors](https://img.shields.io/github/contributors/brrbrr/network-list-toolkit)
-![GitHub stars](https://img.shields.io/github/stars/brrbrr/network-list-toolkit?style=social)
-![GitHub forks](https://img.shields.io/github/forks/brrbrr/network-list-toolkit?style=social)
-# Custom-Built Managed Network List Toolkit
+![GitHub repo size](https://img.shields.io/github/repo-size/brrbrr/akamai-custom-built-managed-network-list-toolkit)
+![GitHub contributors](https://img.shields.io/github/contributors/brrbrr/akamai-custom-built-managed-network-list-toolkit)
+![GitHub stars](https://img.shields.io/github/stars/brrbrr/akamai-custom-built-managed-network-list-toolkit?style=social)
+![GitHub forks](https://img.shields.io/github/forks/brrbrr/akamai-custom-built-managed-network-list-toolkit?style=social)
+# Akamai Custom-Built Managed Network List Toolkit
 
 This Custom-Built Managed Network List Toolkit allow you the automation of Akamai network lists.
 It perform the following functions:
 
 1. Update existing Network List from source or distant (via URL) CSV file
-2. Activate the Network List on either production or staging networks
+2. Activate the Network List on either Akamai production or staging network
 > Note: This toolkit is based on the [Akamai Network List API](https://techdocs.akamai.com/network-lists/reference/api).
 ## Introduction
 Akamai Network lists are used to manage collections of IP addresses/CIDR blocks (v4 or v6) or geographic locations.
@@ -18,7 +18,7 @@ The beauty of Network Lists is that you can edit addresses within a network list
 
 Akamai​ creates and offers packaged network lists for you to use. These lists feature a wave icon beside their name and are usually collections of IP addresses around a common theme, like cloud service networks you may use. These lists are *read-only*, which means you can't edit them, but you can duplicate and edit your own copy.
 
-You can also create your own custom network lists. For example, say you want to allow all your internal IP addresses and those belonging to your vendors. You'd collect them in a network list and activate it. Then in a security policy, you'd use IP/Geo controls to allow all requests from that list. 
+You can also create your own custom network lists. For example, say you want to allow all your internal IP addresses and those belonging to your vendors. You'd collect them in a network list and activate it. Then in a security policy, you'd use IP/Geo controls to allow all requests from that list.
 
 But what if my partner is updating his IP addresses on a regular basis ?
 1. You can update manually the network list via the Akamai Control Center
@@ -42,21 +42,23 @@ Before you begin, ensure you have met the following requirements:
 
 ## Usage
 ```python
-python3 network-list-toolkit.py list-name [--file] [--delimiter] [--url] [--action] [--network] [--email] [--comment] [--config] [--section] [--accountkey]
+python3 network-list-toolkit.py [--file] [--delimiter] [--url] [--action] [--network] [--email] [--comment] [--config] [--section] [--accountkey] list-name
 ```
 
 ## Arguments
-
+Mandatory arguments:
 - `list-name`: the name of the network list to modify.
+
+Optional arguments:
 - `--file`: path to CSV file with IPs for the network list. Default is list.csv in current directory.
-- `--delimiter`: CSV delimiter used. Default is ,.
+- `--delimiter`: CSV delimiter used. Default is comma (,).
 - `--url`: URL to CSV file with IPs for the network list.
 - `--action`: the action to take on the network list. Supported options are append (default) or overwrite.
 - `--network`: activation network: production or staging.
 - `--email`: comma-delimited email list for activation email notifications.
 - `--comment`: activation comments.
 - `--config`: full or relative path to .edgerc file. Default is ~/.edgerc.
-- `--section`: the section of the .edgerc file with the proper {OPEN} API credentials. Default is default.
+- `--section`: the section of the .edgerc file with the proper {OPEN} API credentials. Default is [default].
 - `--accountkey`: pass an account switch key in a request to manage an account different from the one in which you created your client.
 
 ## Authentication
@@ -78,13 +80,17 @@ For more information on Akamai EdgeGrid, _.edgerc_ file and creating Akamai Edge
 # Contributing
 
 We're happy to accept help from fellow code-monkeys.
-Report issues/questions/feature requests on in the [issues](https://github.com/brrbrr/network-list-toolkit/issues) section.
+Use issues section to track ideas, feedback, tasks, or bugs.
 Refer to the [contribution guidelines](./contributing.md) for information on contributing to this module.
 
 # Authors
 
-- [@Benjamin Brouard](https://www.github.com/brrbrr), Security Professional Services @Akamai.
+![@Benjamin Brouard](https://img.shields.io/badge/Benjamin%20Brouard-Security%20Professional%20Services%20%40%20Akamai-blue?logo=akamai&link=https://www.github.com/brrbrr)
 
 # License
 
 [Apache License 2](https://choosealicense.com/licenses/apache-2.0/). See [LICENSE](./LICENSE.md) for full details.
+
+-----------------
+
+![Made with love](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F-in%20France-EF4135?labelColor=0055A4)
